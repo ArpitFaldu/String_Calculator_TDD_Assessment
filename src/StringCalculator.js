@@ -5,8 +5,18 @@ function add(numbers) {
 
     if (numbers.startsWith('//')) {
         const [delimiterLine, numberLine] = numbers.split('\n');
-        const custom = delimiterLine.slice(2); // extract the delimiter
-        delimiter = new RegExp(escapeRegex(custom));
+
+        // Check for long delimiter format: //[***]
+        const longDelimiterMatch = delimiterLine.match(/^\/\/\[(.+)\]$/);
+        if (longDelimiterMatch) {
+            delimiter = new RegExp(escapeRegex(longDelimiterMatch[1]));
+        } 
+        else {
+            // length of delimiter=1
+            const custom = delimiterLine.slice(2);
+            delimiter = new RegExp(escapeRegex(custom));
+        }
+
         numbers = numberLine;
     }
 
@@ -21,4 +31,4 @@ function escapeRegex(str) {
     return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
 }
 
-module.exports = add ;
+module.exports = add;
