@@ -20,4 +20,8 @@ describe('Started writing tests',()=>{
         expect(add("1,2,3,4,5")).toBe(15);
     });
 
+    test('Return the sum of all the numbers separated by newline or comma', () => {
+        expect(add("1\n2,3")).toBe(6);
+    });
+
 })
