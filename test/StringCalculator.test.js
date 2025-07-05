@@ -10,4 +10,8 @@ describe('Started writing tests',()=>{
         expect(add("")).toBe(0)
     });
 
+    test('Return the number itself for single number as input', () => {
+        expect(add("1")).toBe(1)
+    });
+
 })
