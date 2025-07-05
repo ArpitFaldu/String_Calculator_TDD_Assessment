@@ -32,4 +32,8 @@ describe('Started writing tests',()=>{
         expect(add("//[***]\n1***2***3")).toBe(6);
     });
 
+    test('Return the sum of all the numbers separated by multiple custom delimiters which is defined after // at the start of the input', () => {
+        expect(add("//[*][%]\n1*2%3")).toBe(6);
+    });
+
 })
