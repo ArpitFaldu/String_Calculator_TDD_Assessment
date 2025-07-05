@@ -10,12 +10,10 @@ function add(numbers) {
         const multiDelimiterMatch = delimiterLine.match(/\/\/(\[.*\])+/);
 
         if (multiDelimiterMatch) {
-            // Extract all delimiters inside []
             const delimiterParts = [...delimiterLine.matchAll(/\[([^\]]+)\]/g)]
                 .map(match => escapeRegex(match[1]));
             delimiter = new RegExp(delimiterParts.join('|'));
         } else {
-            // length of delimiter=1
             const custom = delimiterLine.slice(2);
             delimiter = new RegExp(escapeRegex(custom));
         }
@@ -26,6 +24,12 @@ function add(numbers) {
     const parsedNumbers = numbers
         .split(delimiter)
         .map(num => parseInt(num, 10));
+
+    // Check for negatives and throw detailed error
+    const negatives = parsedNumbers.filter(n => n < 0);
+    if (negatives.length > 0) {
+        throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
+    }
 
     return parsedNumbers.reduce((sum, num) => sum + num, 0);
 }
