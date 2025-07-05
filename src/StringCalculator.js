@@ -6,13 +6,16 @@ function add(numbers) {
     if (numbers.startsWith('//')) {
         const [delimiterLine, numberLine] = numbers.split('\n');
 
-        // Check for long delimiter format: //[***]
-        const longDelimiterMatch = delimiterLine.match(/^\/\/\[(.+)\]$/);
-        if (longDelimiterMatch) {
-            delimiter = new RegExp(escapeRegex(longDelimiterMatch[1]));
-        } 
-        else {
-            // length of delimiter=1
+        // Check for multiple delimiters: //[delim1][delim2]
+        const multiDelimiterMatch = delimiterLine.match(/\/\/(\[.*\])+/);
+
+        if (multiDelimiterMatch) {
+            // Extract all delimiters inside []
+            const delimiterParts = [...delimiterLine.matchAll(/\[([^\]]+)\]/g)]
+                .map(match => escapeRegex(match[1]));
+            delimiter = new RegExp(delimiterParts.join('|'));
+        } else {
+            // Fallback: single-char delimiter
             const custom = delimiterLine.slice(2);
             delimiter = new RegExp(escapeRegex(custom));
         }
