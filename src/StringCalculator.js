@@ -15,7 +15,7 @@ function add(numbers) {
                 .map(match => escapeRegex(match[1]));
             delimiter = new RegExp(delimiterParts.join('|'));
         } else {
-            // Fallback: single-char delimiter
+            // length of delimiter=1
             const custom = delimiterLine.slice(2);
             delimiter = new RegExp(escapeRegex(custom));
         }
