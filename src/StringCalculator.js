@@ -34,14 +34,15 @@ function add(numbers) {
         throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
     }
 
-    return parsedNumbers.reduce((sum, num) => sum + num, 0);
+    // ✅ Ignore numbers > 1000
+    return parsedNumbers
+        .filter(n => n <= 1000)
+        .reduce((sum, num) => sum + num, 0);
 }
-
 
 function getCalledCount() {
     return callCount;
 }
-
 
 function resetCalledCount() {
     callCount = 0;
@@ -51,5 +52,4 @@ function escapeRegex(str) {
     return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
 }
 
-// Export all functions needed for testing
 module.exports = { add, getCalledCount, resetCalledCount };
