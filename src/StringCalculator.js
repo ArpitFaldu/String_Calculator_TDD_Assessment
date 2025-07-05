@@ -6,8 +6,7 @@ function add(numbers){
         return 0;
     }
 
-    //returning the number itself for single number as input
-    return parseInt(numbers);
+    return numbers.split(',').map(Number).reduce((sum, number) => sum + number, 0);
 
 }
 
