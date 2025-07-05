@@ -44,4 +44,11 @@ describe('Started writing tests',()=>{
         expect(() => add("1,-2,3,-4")).toThrow("negative numbers not allowed -2,-4");
     });
 
+    test('Return number of times add() was called', () => {
+        add("1,2");
+        add("3,4");
+        add("1,;");
+        expect(getCalledCount()).toBe(3);
+    });
+
 })
