@@ -1,4 +1,8 @@
+let callCount = 0; // Track number of times add() is called
+
 function add(numbers) {
+    callCount++; // Increment count on every call
+
     if (numbers === '') return 0;
 
     let delimiter = /,|\n/;
@@ -25,7 +29,6 @@ function add(numbers) {
         .split(delimiter)
         .map(num => parseInt(num, 10));
 
-    // Check for negatives and throw detailed error
     const negatives = parsedNumbers.filter(n => n < 0);
     if (negatives.length > 0) {
         throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
@@ -34,8 +37,19 @@ function add(numbers) {
     return parsedNumbers.reduce((sum, num) => sum + num, 0);
 }
 
+
+function getCalledCount() {
+    return callCount;
+}
+
+
+function resetCalledCount() {
+    callCount = 0;
+}
+
 function escapeRegex(str) {
     return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
 }
 
-module.exports = add;
+// Export all functions needed for testing
+module.exports = { add, getCalledCount, resetCalledCount };

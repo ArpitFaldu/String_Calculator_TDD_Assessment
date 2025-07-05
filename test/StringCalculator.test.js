@@ -1,4 +1,4 @@
-const add=require('../src/StringCalculator')
+const { add, getCalledCount, resetCalledCount }=require('../src/StringCalculator')
 
 test('Jest is working!', () => {
     expect(1).toBe(1);
@@ -44,7 +44,8 @@ describe('Started writing tests',()=>{
         expect(() => add("1,-2,3,-4")).toThrow("negative numbers not allowed -2,-4");
     });
 
-    test('Return number of times add() was called', () => {
+   test('Return number of times add() was called', () => {
+        resetCalledCount();
         add("1,2");
         add("3,4");
         add("1,;");
