@@ -1,16 +1,24 @@
+function add(numbers) {
+    if (numbers === '') return 0;
 
-function add(numbers){
+    let delimiter = /,|\n/;
 
-    //Checking if the string of numbers in empty
-    if(numbers===""){
-        return 0;
+    if (numbers.startsWith('//')) {
+        const [delimiterLine, numberLine] = numbers.split('\n');
+        const custom = delimiterLine.slice(2); // extract the delimiter
+        delimiter = new RegExp(escapeRegex(custom));
+        numbers = numberLine;
     }
 
-    // Split on comma or newline
-    const parts = numbers.split(/,|\n/);
-    const parsedNumbers = parts.map(num => parseInt(num));
-    return parsedNumbers.reduce((sum, number) => sum + number, 0);
+    const parsedNumbers = numbers
+        .split(delimiter)
+        .map(num => parseInt(num, 10));
 
+    return parsedNumbers.reduce((sum, num) => sum + num, 0);
 }
 
-module.exports=add;
+function escapeRegex(str) {
+    return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
+}
+
+module.exports = add ;
