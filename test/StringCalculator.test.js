@@ -24,8 +24,12 @@ describe('Started writing tests',()=>{
         expect(add("1\n2,3")).toBe(6);
     });
 
-    test('Return the sum of all the numbers separated by custom delimiter which is ther after // at the start of the input', () => {
+    test('Return the sum of all the numbers separated by custom delimiter which is defined after // at the start of the input', () => {
         expect(add("//;\n1;2")).toBe(3);
+    });
+
+    test('Return the sum of all the numbers separated by custom delimiter of length>1 which is defined after // at the start of the input', () => {
+        expect(add("//[***]\n1***2***3")).toBe(6);
     });
 
 })
