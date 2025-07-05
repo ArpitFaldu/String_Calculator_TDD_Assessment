@@ -14,4 +14,10 @@ describe('Started writing tests',()=>{
         expect(add("1")).toBe(1)
     });
 
+    //test case for 2 or more numbers in the 
+    test('Return the sum of all the numbers separated by comma', () => {
+        expect(add("1,2")).toBe(3);
+        expect(add("1,2,3,4,5")).toBe(15);
+    });
+
 })
