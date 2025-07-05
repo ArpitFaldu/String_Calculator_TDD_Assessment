@@ -52,4 +52,8 @@ describe('Started writing tests',()=>{
         expect(getCalledCount()).toBe(3);
     });
 
+    test('Numbers > 1000 should be ignored', () => {
+        expect(add("2,1001,3")).toBe(5);
+    });
+
 })
