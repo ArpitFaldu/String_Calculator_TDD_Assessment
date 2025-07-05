@@ -6,7 +6,10 @@ function add(numbers){
         return 0;
     }
 
-    return numbers.split(',').map(Number).reduce((sum, number) => sum + number, 0);
+    // Split on comma or newline
+    const parts = numbers.split(/,|\n/);
+    const parsedNumbers = parts.map(num => parseInt(num));
+    return parsedNumbers.reduce((sum, number) => sum + number, 0);
 
 }
 
